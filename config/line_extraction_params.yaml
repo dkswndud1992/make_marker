@@ -1,0 +1,18 @@
+# Line extraction parameters for laser_line_extraction package
+
+# Bearing and range window for line extraction
+bearing_std_dev: 0.001
+range_std_dev: 0.02
+least_sq_angle_thresh: 0.0001
+least_sq_radius_thresh: 0.0001
+
+# Minimum and maximum line parameters
+min_line_points: 9
+min_line_length: 0.2
+max_line_width: 0.05
+
+# Outlier parameters
+outlier_dist: 0.05
+
+# Distance between line segments
+min_split_dist: 0.1
