@@ -69,10 +69,9 @@ Launch 파일에서 다음 파라미터를 조정할 수 있습니다:
 
 ```xml
 <arg name="base_frame" default="base_link" />          <!-- 기준 프레임 -->
-<arg name="laser_frame" default="laser" />             <!-- 레이저 프레임 -->
-<arg name="search_radius" default="0.5" />             <!-- 직선 탐색 반경 (미터) -->
-<arg name="angle_tolerance" default="15.0" />          <!-- 각도 허용 오차 (도) -->
-<arg name="min_line_length" default="0.2" />           <!-- 최소 직선 길이 (미터) -->
+<arg name="search_radius" default="0.2" />             <!-- 직선 탐색 반경 (미터) -->
+<arg name="angle_tolerance" default="45.0" />          <!-- 각도 허용 오차 (도) -->
+<arg name="min_line_length" default="0.05" />           <!-- 최소 직선 길이 (미터) -->
 <arg name="publish_visualization" default="true" />    <!-- 시각화 발행 여부 -->
 ```
 
@@ -91,7 +90,6 @@ Launch 파일에서 다음 파라미터를 조정할 수 있습니다:
 
 #### 파라미터
 - `~base_frame` (string, default: "base_link"): 기준 좌표계
-- `~laser_frame` (string, default: "laser"): 레이저 좌표계
 - `~search_radius` (double, default: 0.5): 마커 주변 직선 탐색 반경 (m)
 - `~angle_tolerance` (double, default: 15.0): 각도 정렬 허용 오차 (도)
 - `~min_line_length` (double, default: 0.2): 고려할 최소 직선 길이 (m)
@@ -137,7 +135,6 @@ RViz 설정 파일은 `config/correction_viz.rviz`에 포함되어 있습니다.
 ```yaml
 min_line_points: 9          # 직선을 구성하는 최소 포인트 수
 min_line_length: 0.2        # 최소 직선 길이 (m)
-max_line_width: 0.05        # 최대 직선 두께 (m)
 outlier_dist: 0.05          # 이상치 거리 임계값
 ```
 

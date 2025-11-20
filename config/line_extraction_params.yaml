@@ -2,14 +2,19 @@
 
 # Bearing and range window for line extraction
 bearing_std_dev: 0.001
+frame_id: TETRA_NS/laser
 range_std_dev: 0.02
 least_sq_angle_thresh: 0.0001
 least_sq_radius_thresh: 0.0001
+publish_markers: true
+scan_topic: /scan
 
 # Minimum and maximum line parameters
+max_line_gap: 0.4
+min_range: 0.05
+max_range: 10.0
 min_line_points: 9
 min_line_length: 0.2
-max_line_width: 0.05
 
 # Outlier parameters
 outlier_dist: 0.05

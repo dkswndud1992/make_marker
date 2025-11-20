@@ -4,12 +4,11 @@
   
   <!-- Arguments -->
   <arg name="base_frame" default="base_link" />
-  <arg name="laser_frame" default="laser" />
   <arg name="laser_topic" default="/scan" />
   <arg name="ar_marker_topic" default="/ar_pose_marker" />
-  <arg name="search_radius" default="0.5" />
-  <arg name="angle_tolerance" default="15.0" />
-  <arg name="min_line_length" default="0.2" />
+  <arg name="search_radius" default="0.2" />
+  <arg name="angle_tolerance" default="45.0" />
+  <arg name="min_line_length" default="0.05" />
   <arg name="publish_visualization" default="true" />
   
   <!-- Laser Line Extraction -->
@@ -24,7 +23,6 @@
         name="ar_marker_laser_correction" output="screen">
     <remap from="ar_pose_marker" to="$(arg ar_marker_topic)" />
     <param name="base_frame" value="$(arg base_frame)" />
-    <param name="laser_frame" value="$(arg laser_frame)" />
     <param name="search_radius" value="$(arg search_radius)" />
     <param name="angle_tolerance" value="$(arg angle_tolerance)" />
     <param name="min_line_length" value="$(arg min_line_length)" />
