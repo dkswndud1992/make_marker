@@ -49,6 +49,8 @@ public:
             &ARMarkerLaserCorrection::lineSegmentsCallback, this);
         
         // Publishers
+        ar_pose_pub_ = nh.advertise<geometry_msgs::PoseStamped>(
+            "ar_marker_pose", 10);
         corrected_pose_pub_ = nh.advertise<geometry_msgs::PoseStamped>(
             "corrected_marker_pose", 10);
         corrected_markers_pub_ = nh.advertise<ar_track_alvar_msgs::AlvarMarkers>(
@@ -70,6 +72,7 @@ private:
     // ROS communication
     ros::Subscriber ar_marker_sub_;
     ros::Subscriber line_segments_sub_;
+    ros::Publisher ar_pose_pub_;
     ros::Publisher corrected_pose_pub_;
     ros::Publisher corrected_markers_pub_;
     ros::Publisher vis_marker_pub_;
@@ -168,11 +171,16 @@ private:
             tf::Matrix3x3(q).getRPY(roll, pitch, yaw);
             
             // Apply correction (only yaw, preserve roll and pitch)
-            q.setRPY(roll, pitch, corrected_yaw);
+            q.setRPY(0, corrected_yaw-M_PI/2, -M_PI);
             
             tf::quaternionTFToMsg(q, corrected_marker.pose.pose.orientation);
             
             corrected_markers.markers.push_back(corrected_marker);
+
+            geometry_msgs::PoseStamped ar_pose;
+            ar_pose.header = marker.header;
+            ar_pose.pose = marker.pose.pose;
+            ar_pose_pub_.publish(ar_pose);
             
             // Publish individual corrected pose
             geometry_msgs::PoseStamped corrected_pose;
