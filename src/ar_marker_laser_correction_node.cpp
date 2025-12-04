@@ -113,19 +113,21 @@ private:
      */
     void arMarkerCallback(const ar_track_alvar_msgs::AlvarMarkers::ConstPtr& msg)
     {
+        ar_track_alvar_msgs::AlvarMarkers corrected_markers;
+        corrected_markers.header = msg->header;
+
         if (!lines_received_)
         {
             ROS_WARN_THROTTLE(5.0, "No line segments received yet");
+            corrected_markers_pub_.publish(corrected_markers);
             return;
         }
         
         if (msg->markers.empty())
         {
+            corrected_markers_pub_.publish(corrected_markers);
             return;
         }
-        
-        ar_track_alvar_msgs::AlvarMarkers corrected_markers;
-        corrected_markers.header = msg->header;
         
         visualization_msgs::MarkerArray vis_array;
         
